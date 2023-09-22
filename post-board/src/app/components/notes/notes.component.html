@@ -1,0 +1,7 @@
+<note-card *ngIf="showAdd" class="card" (onEdit)="addNote()"></note-card>
+<note-card class="card" *ngFor="let note of notes"
+  [note]="note"
+  (onEdit)="editNote($event)"
+  (onRemove)="removeNote($event)"
+  (onAddToFavorites)="addToFavorites($event)"
+></note-card>

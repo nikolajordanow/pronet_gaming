@@ -1,0 +1,11 @@
+<form class="form-group" #noteForm="ngForm" (ngSubmit)="post()">
+  <label class="form-label" for="author">Author Name</label>
+  <input class="heading form-input" name="author" [(ngModel)]="note.author" type="text" [value]="note.author" required>
+
+  <label class="form-label" for="content">What would you like to say?</label>
+  <textarea class="content form-input" name="content" [(ngModel)]="note.content" type="text" [value]="note.content"
+    required></textarea>
+
+  <button type="submit" class="btn" [disabled]="!noteForm.form.valid">Save</button>
+  <button type="reset" class="btn" (click)="cancel()">Cancel</button>
+</form>

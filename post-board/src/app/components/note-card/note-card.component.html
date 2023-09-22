@@ -1,0 +1,12 @@
+<div class="card-container">
+  <button *ngIf="note.id" (click)="remove()">X</button>
+  <button *ngIf="note.id && !note.isFavorite" (click)="addToFavorites()">Add to favorites</button>
+  <div class="text-container" (click)="edit()">
+    <div class="heading">
+      {{ note.author }}
+    </div>
+    <div class="content">
+      {{ note.content }}
+    </div>
+  </div>
+</div>
