@@ -21,11 +21,10 @@ import { environment } from './environments/environment.prod';
 import { NotesSelector } from './store/selectors/notes.selector';
 import { ToasterEffects } from './store/effects/toaster.effects';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes/routes';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotesComponent } from './components/notes/notes.component';
+import { BoardResolver } from './resolvers/board.resolver';
 
 @NgModule({
   declarations: [
@@ -59,7 +58,8 @@ import { NotesComponent } from './components/notes/notes.component';
   providers: [
     NoteService,
     ToasterService,
-    NotesSelector
+    NotesSelector,
+    BoardResolver
   ],
   bootstrap: [AppComponent]
 })

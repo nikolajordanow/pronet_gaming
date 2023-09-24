@@ -57,10 +57,10 @@ export class NotesEffects {
 
   public changeFavorites$: Observable<Action> = createEffect(
     () => this._actions$.pipe(
-      ofType(notesActions.ChangeFavoritesRequest),
+      ofType(notesActions.ToggleFavoritesStatusRequest),
       switchMap(({ note }) => this._noteService.addToFavorites(note).pipe(
-        map(() => notesActions.ChangeFavoritesSuccess({ note })),
-        catchError(error => of(notesActions.ChangeFavoritesError({ error })))
+        map(() => notesActions.ToggleFavoritesStatusSuccess({ note })),
+        catchError(error => of(notesActions.ToggleFavoritesStatusError({ error })))
       ))
     )
   );

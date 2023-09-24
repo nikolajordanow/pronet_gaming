@@ -14,7 +14,10 @@ export class NoteService {
   }
 
   public add(note: Note): Observable<Note> {
-    return of(note);
+    return of({
+      ...note,
+      id: crypto.randomUUID()
+    });
   }
 
   public addToFavorites(note: Note): Observable<Note> {

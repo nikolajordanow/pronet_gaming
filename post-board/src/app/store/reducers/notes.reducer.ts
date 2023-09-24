@@ -24,11 +24,17 @@ export const notesReducer = createReducer(
   })),
   on(notesActions.UpdateNoteSuccess, (state, { note }) => ({
     notes: [
-      ...state.notes.filter(n => n.id !== note.id),
-      note
+      ...state.notes.map(n => {
+        if (n.id === note.id) {
+          return {
+            ...note
+          }
+        }
+        return n;
+      })
     ]
   })),
-  on(notesActions.ChangeFavoritesSuccess, (state, { note }) => ({
+  on(notesActions.ToggleFavoritesStatusSuccess, (state, { note }) => ({
     notes: [
       ...state.notes.map(n => {
         if (n.id === note.id) {

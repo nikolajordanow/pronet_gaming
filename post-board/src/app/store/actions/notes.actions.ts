@@ -19,6 +19,6 @@ export const DeleteNoteRequest = createAction(actionName('Delete Note Request'),
 export const DeleteNoteSuccess = createAction(actionName('Delete Note Success'), props<{ id: string }>());
 export const DeleteNoteError = createAction(actionName('Delete Note Error'), props<{ error: any }>());
 
-export const ChangeFavoritesRequest = createAction(actionName('Change Favorites Request'), props<{ note: Note }>());
-export const ChangeFavoritesSuccess = createAction(actionName('Change Favorites Success'), props<{ note: Note }>());
-export const ChangeFavoritesError = createAction(actionName('Change Favorites Error'), props<{ error: any }>());
+export const ToggleFavoritesStatusRequest = createAction(actionName('Toggle Favorites Status Request'), props<{ note: Note }>());
+export const ToggleFavoritesStatusSuccess = createAction(actionName('Toggle Favorites Status Success'), props<{ note: Note }>());
+export const ToggleFavoritesStatusError = createAction(actionName('Toggle Favorites Status Error'), props<{ error: any }>());

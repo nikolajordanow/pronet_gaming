@@ -20,7 +20,7 @@ export class NoteCardComponent {
   public onEdit = new EventEmitter<Note>();
 
   @Output()
-  public onAddToFavorites = new EventEmitter<Note>();
+  public onToggleFavorites = new EventEmitter<Note>();
 
   @Output()
   public onRemove = new EventEmitter<Note>();
@@ -37,9 +37,15 @@ export class NoteCardComponent {
     }
   }
 
-  public addToFavorites(): void {
+  public toggleFavorites(): void {
     if (this.note) {
-      this.onAddToFavorites.emit(this.note);
+      this.onToggleFavorites.emit(this.note);
     }
+  }
+
+  public getFavoritesLabel(note: Note): string {
+    return note.isFavorite
+      ? 'Remove from favorites'
+      : 'Add to favorites';
   }
 }

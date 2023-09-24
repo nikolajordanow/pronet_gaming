@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { Note } from 'src/app/models/note';
+import * as noteActions from 'src/app/store/actions';
+import { NoteFormComponent } from '../note-form/note-form.component';
 
 @Component({
   selector: 'notes',
@@ -7,43 +11,65 @@ import { Note } from 'src/app/models/note';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent {
+  private readonly _widthModal: string = '600px';
+  private readonly _heightModal: string = '500px';
+  
   @Input()
   public notes: Note[] = [];
 
   @Input()
   public showAdd: boolean = false;
 
-  @Output()
-  public onAddNote = new EventEmitter<Note>();
-
-  @Output()
-  public onEditNote = new EventEmitter<Note>();
-
-  @Output()
-  public onAddToFavorites = new EventEmitter<Note>();
-
-  @Output()
-  public onRemoveNote = new EventEmitter<Note>();
+  constructor(
+    private readonly _store: Store,
+    private readonly _dialog: MatDialog
+  ) {
+  }
 
   public addNote(): void {
-    this.onAddNote.emit();
+    const dialogRef = this._dialog.open(NoteFormComponent, {
+      width: this._widthModal,
+      height: this._heightModal,
+      data: {
+        author: '',
+        content: '',
+        date: new Date(),
+        isFavorite: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(note => {
+      if (!!note) {
+        this._store.dispatch(noteActions.AddNoteRequest({ note }));
+      }
+    });
   }
 
   public editNote(note: Note): void {
-    if (note) {
-      this.onEditNote.emit(note);
-    }
+    const dialogRef = this._dialog.open(NoteFormComponent, {
+      width: this._widthModal,
+      height: this._heightModal,
+      data: {
+        id: note.id,
+        author: note.author,
+        content: note.content,
+        date: new Date(),
+        isFavorite: note.isFavorite
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(note => {
+      if (!!note) {
+        this._store.dispatch(noteActions.UpdateNoteRequest({ note }));
+      }
+    });
   }
 
   public removeNote(note: Note): void {
-    if (note) {
-      this.onRemoveNote.emit(note);
-    }
+    this._store.dispatch(noteActions.DeleteNoteRequest({ id: note.id }));
   }
 
-  public addToFavorites(note: Note): void {
-    if (note) {
-      this.onAddToFavorites.emit(note);
-    }
+  public toggleFavorites(note: Note): void {
+    this._store.dispatch(noteActions.ToggleFavoritesStatusRequest({ note }));
   }
 }
