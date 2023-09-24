@@ -1,6 +1,4 @@
 <div class="card-container">
-  <button *ngIf="note.id" (click)="remove()">Delete</button>
-  <button *ngIf="note.id" (click)="toggleFavorites()">{{ getFavoritesLabel(note) }}</button>
   <div class="text-container" (click)="edit()">
     <div class="heading">
       {{ note.author }}
@@ -8,5 +6,9 @@
     <div class="content">
       {{ note.content }}
     </div>
+  </div>
+  <div *ngIf="note.id" class="buttons">
+    <button (click)="remove()">Delete</button>
+    <button (click)="toggleFavorites()">{{ getFavoritesLabel(note) }}</button>
   </div>
 </div>
