@@ -6,7 +6,9 @@ import { BoardComponent } from './components/board/board.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteService } from './services/notes.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToasterService } from './services/toaster.service';
 import { ToasterComponent } from './components/toaster/toaster.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
@@ -25,6 +27,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotesComponent } from './components/notes/notes.component';
 import { BoardResolver } from './resolvers/board.resolver';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,9 +43,13 @@ import { BoardResolver } from './resolvers/board.resolver';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     MatDialogModule,
     MatToolbarModule,
-    BrowserModule, 
+    MatAutocompleteModule,
+    MatInputModule,
+    BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     EffectsModule.forRoot(
       NotesEffects,

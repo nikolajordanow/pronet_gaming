@@ -1,7 +1,24 @@
-<note-card *ngIf="showAdd" class="card" (onEdit)="addNote()"></note-card>
-<note-card class="card" *ngFor="let note of notes"
-  [note]="note"
-  (onEdit)="editNote($event)"
-  (onRemove)="removeNote($event)"
-  (onToggleFavorites)="toggleFavorites($event)"
-></note-card>
+<form class="form">
+  <div>
+    <mat-form-field class="search-bar-width">
+      <input
+        type="text"
+        placeholder="Search by author"
+        aria-label="note"
+        matInput
+        [formControl]="formControl"
+        [matAutocomplete]="auto"
+        #search
+      >
+      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <note-card *ngIf="showAdd" class="card" (onEdit)="addNote()"></note-card>
+  <note-card class="card" *ngFor="let note of filteredNotes | async"
+    [note]="note"
+    (onEdit)="editNote($event)"
+    (onRemove)="removeNote($event)"
+    (onToggleFavorites)="toggleFavorites($event)"
+  ></note-card>
+</form>
