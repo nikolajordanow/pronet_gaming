@@ -1,7 +1,7 @@
 # PostBoard
 
 The application lets you create, update and delete notes.\
-It also provides a Favorites section and a search bar.\
+It also provides a Favorites section and a search bar.
 
 It uses `NgRx` framework and `Angular Material` components.
 
